@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Regalo Mágico Para Ti</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap');
+
+        html, body {
+            overflow-x: hidden; /* evita movimiento lateral en móviles */
+        }
+
+        body {
+            background-color: #0c0c1e;
+            background-image: radial-gradient(circle, #1a1a3d 0%, #0c0c1e 70%);
+            color: #f0e68c;
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            cursor: default;
+        }
+        .star { position: absolute; background-color: #ffd700; border-radius: 50%; opacity: 0.5; animation: twinkle 5s infinite alternate; box-shadow: 0 0 5px 1px rgba(255, 215, 0, 0.5); }
+        .star.s1 { top: 10%; left: 15%; width: 2px; height: 2px; animation-delay: 0s; } .star.s2 { top: 20%; left: 80%; width: 3px; height: 3px; animation-delay: 0.5s; } .star.s3 { top: 50%; left: 10%; width: 2px; height: 2px; animation-delay: 1s; } .star.s4 { top: 80%; left: 90%; width: 3px; height: 3px; animation-delay: 1.5s; } .star.s5 { top: 90%; left: 25%; width: 2px; height: 2px; animation-delay: 2s; } .star.s6 { top: 30%; left: 40%; width: 1px; height: 1px; animation-delay: 2.5s; } .star.s7 { top: 60%; left: 60%; width: 2px; height: 2px; animation-delay: 3s; }
+        @keyframes twinkle { 0% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 0.8; transform: scale(1.2); } 100% { opacity: 0.3; transform: scale(0.8); } }
+        .large-star { position: absolute; background-color: rgba(255, 215, 0, 0.1); border-radius: 50%; box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.2); animation: pulse-star 15s infinite ease-in-out alternate; pointer-events: none; z-index: 1; }
+        .large-star.ls1 { width: 40px; height: 40px; top: 5%; left: 70%; animation-delay: 0s; } .large-star.ls2 { width: 50px; height: 50px; top: 80%; left: 15%; animation-delay: 2s; } .large-star.ls3 { width: 30px; height: 30px; top: 40%; left: 85%; animation-delay: 4s; }
+        @keyframes pulse-star { 0% { transform: scale(0.9); opacity: 0.1; } 50% { transform: scale(1.1); opacity: 0.25; } 100% { transform: scale(0.9); opacity: 0.1; } }
+        .shooting-star { position: absolute; width: 4px; height: 4px; background: linear-gradient(to right, #ffd700, transparent); border-radius: 50%; box-shadow: 0 0 10px 5px rgba(255, 215, 0, 0.7); opacity: 0; pointer-events: none; z-index: 99; animation: fall-and-fade 4s forwards ease-out; }
+        @keyframes fall-and-fade {
+            0% { transform: translate(0, 0) rotate(45deg) scaleX(1); opacity: 0; width: 4px; height: 4px; }
+            10% { opacity: 1; width: 150px; height: 4px; }
+            100% { transform: translate(120vw, 120vh) rotate(45deg) scaleX(0.1); opacity: 0; width: 5px; height: 2px; }
+        }
+        .cursor-trail { position: absolute; width: 8px; height: 8px; background: #ffd700; border-radius: 50%; pointer-events: none; box-shadow: 0 0 10px 2px #ffd700, 0 0 20px 5px rgba(255, 215, 0, 0.5); animation: fade-out 1s forwards; z-index: 1000; }
+        @keyframes fade-out { from { transform: scale(1); opacity: 1; } to { transform: scale(0); opacity: 0; } }
+        .bouquet-container { position: relative; width: 300px; height: 300px; cursor: pointer; z-index: 20; margin-bottom: 20px; animation: breathing-bouquet 8s ease-in-out infinite alternate, fade-in-zoom 1.5s ease-out 0.5s forwards; opacity: 0; }
+        @keyframes breathing-bouquet { from { transform: rotate(-1.5deg); } to { transform: rotate(1.5deg); } }
+        @keyframes fade-in-zoom { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        
+        /* ======== NUEVA CLASE PARA PAUSAR LA ANIMACIÓN ======== */
+        .animation-paused {
+            animation-play-state: paused !important;
+        }
+
+        .flower-container { position: absolute; width: 150px; height: 200px; transform-origin: bottom center; }
+        #flower1 { bottom: 0; left: 50%; transform: translateX(-50%) rotate(0deg); z-index: 20; } #flower2 { bottom: 0; left: 10%; transform: rotate(-20deg); } #flower3 { bottom: 0; left: 40%; transform: rotate(20deg); }
+        .flower-head { position: relative; width: 90px; height: 90px; left: 50%; transform: translateX(-50%); }
+        .petal { position: absolute; width: 38px; height: 55px; background: #ffeb3b; border-radius: 50% 50% 0 0 / 70% 70% 0 0; left: calc(50% - 19px); top: 0; transform-origin: bottom center; box-shadow: inset 0 -5px 10px rgba(249, 168, 37, 0.4); }
+        .petal:nth-child(1) { transform: rotate(0deg); } .petal:nth-child(2) { transform: rotate(72deg); } .petal:nth-child(3) { transform: rotate(144deg); } .petal:nth-child(4) { transform: rotate(216deg); } .petal:nth-child(5) { transform: rotate(288deg); }
+        .center { position: absolute; width: 45px; height: 45px; background-color: #fdd835; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 15px 4px rgba(255, 215, 0, 0.8), inset 0 0 8px rgba(0, 0, 0, 0.2); z-index: 10; transition: box-shadow 0.3s ease-in-out; }
+        .bouquet-container:hover .center { box-shadow: 0 0 25px 8px rgba(255, 215, 0, 1), inset 0 0 12px rgba(0, 0, 0, 0.2); }
+        .stem { position: absolute; width: 6px; height: 120px; background: #4caf50; border-radius: 4px; bottom: 0; left: 50%; transform: translateX(-50%); }
+        .leaf { position: absolute; width: 25px; height: 35px; background: #66bb6a; border-radius: 0 100% 0 100%; bottom: 40px; transform-origin: bottom left; }
+        .leaf.left { left: calc(50% - 6px); transform: rotate(45deg); } .leaf.right { left: calc(50% + 6px); transform: rotate(-45deg) scaleX(-1); }
+        .text-container { max-width: 600px; background-color: rgba(23, 23, 39, 0.85); padding: 30px; border-radius: 15px; border: 1px solid rgba(255, 215, 0, 0.5); box-shadow: 0 0 25px 3px rgba(255, 215, 0, 0.4); position: relative; z-index: 10; animation: fade-in-up 1.5s ease-out 1s forwards; opacity: 0; }
+        @keyframes fade-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        h1 { font-family: 'Dancing Script', cursive; color: #ffd700; font-size: 3em; text-shadow: 0 0 10px #ffd700; margin-bottom: 10px; }
+        p { font-size: 1.1em; line-height: 1.6; margin-top: 0; }
+        .divider { height: 1px; width: 80%; background: linear-gradient(to right, transparent, rgba(255, 215, 0, 0.5), transparent); margin: 20px auto; }
+        
+        #secret-message-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: none; justify-content: center; align-items: center; z-index: 1001; padding: 15px; box-sizing: border-box; }
+        #secret-message { background-color: white; color: #333; padding: 30px; border-radius: 20px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.7); font-family: 'Dancing Script', cursive; text-align: center; max-width: 500px; }
+        #secret-message button { margin-top: 20px; padding: 10px 20px; background-color: #ffd700; border: none; border-radius: 8px; cursor: pointer; font-size: 1em; font-family: 'Quicksand', sans-serif; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: background-color 0.3s ease; }
+        #secret-message button:hover { background-color: #ffc107; }
+        
+        #play-music-button { position: fixed; top: 20px; right: 20px; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.5); color: #ffd700; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 24px; display: flex; justify-content: center; align-items: center; z-index: 999; box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); transition: all 0.3s ease; opacity: 0; animation: fade-in-up 1s ease-out 1.5s forwards; }
+        #play-music-button:hover { background: rgba(255, 215, 0, 0.3); box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); }
+
+        #watermark { position: fixed; bottom: 15px; right: 20px; color: rgba(255, 215, 0, 0.4); font-family: 'Quicksand', sans-serif; font-size: 14px; z-index: 999; pointer-events: none; opacity: 0.8; }
+        
+        @media (max-width: 768px) {
+            .bouquet-container { transform: scale(0.7); margin-bottom: -40px; }
+            h1 { font-size: 2.2em; }
+            #secret-message h2 { font-size: 1.5em; }
+            p, #secret-message p { font-size: 1em; }
+            .text-container { padding: 20px 15px; max-width: 90%; }
+            #play-music-button { width: 45px; height: 45px; font-size: 20px; top: 15px; right: 15px; }
+            #watermark { font-size: 12px; bottom: 10px; right: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="audio/C418  - Sweden - Minecraft Volume Alpha.mp3" type="audio/mpeg">
+    </audio>
+    <button id="play-music-button">🎵</button>
+    <div class="large-star ls1"></div> <div class="large-star ls2"></div> <div class="large-star ls3"></div>
+    <div class="star-container"> <div class="star s1"></div> <div class="star s2"></div> <div class="star s3"></div> <div class="star s4"></div> <div class="star s5"></div> <div class="star s6"></div> <div class="star s7"></div> </div>
+    <div class="bouquet-container" id="interactive-bouquet"> <div class="flower-container" id="flower2"><div class="stem"></div><div class="leaf left"></div><div class="leaf right"></div><div class="flower-head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div></div></div> <div class="flower-container" id="flower3"><div class="stem"></div><div class="leaf left"></div><div class="leaf right"></div><div class="flower-head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div></div></div> <div class="flower-container" id="flower1"><div class="stem"></div><div class="leaf left"></div><div class="leaf right"></div><div class="flower-head"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div></div></div> </div>
+    <div class="text-container"> <h1>Unas flores para ti, Shaira.</h1> <p>Porque la amistad también se celebra con detalles, quería enviarte esto para alegrar tu día. ¡Haz clic en las flores!</p> <div class="divider"></div> </div>
+    <div id="secret-message-overlay"> <div id="secret-message"> <h2>¡Para la mejor amiga!</h2> <p>Gracias por ser tan increíble y por tu amistad. ¡Quería recordarte que vales muchísimo!, se que no es lo mismo que unas flores reales pero quiero darte este detalle hecho por mi porque te quiero mucho!!! :D 
+            la quiero mucho y estare ahi para lo que ocupes siempre :") TQM shaira</p> <button id="close-button">Cerrar</button> </div> </div>
+    <div id="watermark">BY: DarknessVT666 (Darkness-cmd)</div>
+
+    <script>
+        const bouquet = document.getElementById('interactive-bouquet');
+        const secretMessageOverlay = document.getElementById('secret-message-overlay');
+        const closeButton = document.getElementById('close-button');
+
+        bouquet.addEventListener('click', () => {
+            secretMessageOverlay.style.display = 'flex';
+            bouquet.classList.add('animation-paused');
+        });
+
+        closeButton.addEventListener('click', () => {
+            secretMessageOverlay.style.display = 'none';
+            bouquet.classList.remove('animation-paused');
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            let trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            document.body.appendChild(trail);
+            trail.style.left = e.pageX + 'px';
+            trail.style.top = e.pageY + 'px';
+            setTimeout(() => { trail.remove(); }, 1000);
+        });
+
+        function createShootingStar() {
+            let star = document.createElement('div');
+            star.className = 'shooting-star';
+            document.body.appendChild(star);
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.top = Math.random() * window.innerHeight / 2 + 'px';
+            setTimeout(() => { star.remove(); }, 4000);
+        }
+        setInterval(createShootingStar, 5000);
+
+        const playButton = document.getElementById('play-music-button');
+        const music = document.getElementById('background-music');
+        playButton.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                playButton.textContent = '⏸️';
+            } else {
+                music.pause();
+                playButton.textContent = '🎵';
+            }
+        });
+    </script>
+</body>
+</html>
